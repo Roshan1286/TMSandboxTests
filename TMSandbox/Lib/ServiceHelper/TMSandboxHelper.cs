@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net;
 
 namespace TMSandbox.Lib.ServiceHelper;
 
-public class TMSandboxHelper
+public class TmSandboxHelper
 {
     private static readonly Uri BaseUrl = new("https://api.tmsandbox.co.nz");
 
