@@ -50,8 +50,8 @@ The SpecFlow tests will be executed, and you will see the results in the Test Ex
 
 
 ## Assumptions
-- [No App.config/runsettings file provided considering limited scop of the tests]
-- [Only positive scenarios are automated, happy to add additional tests if requested]
-- [Happy to use Non-Specflow based test framework if requested. Eg. MSTest or Nunit etc.]
+- No App.config/runsettings file provided considering limited scop of the tests
+- Only positive scenarios are automated, happy to add additional tests if requested
+- Happy to use Non-Specflow based test framework if requested. Eg. MSTest or Nunit etc.
 
 ## Examples of Test Run
