@@ -1,4 +1,4 @@
-﻿Feature: TMClassifiedListing
+Feature: TMClassifiedListing
 ![TradeMeSadboxTest]( e.g. https://api.tmsandbox.co.nz/v1/Categories/232/Details.json?catalogue=false)
 Simple Test to validate category id with expected values
 
