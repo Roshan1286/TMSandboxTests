@@ -8,6 +8,7 @@ Before you begin, make sure you have the following prerequisites installed on yo
 
 - [Git](https://git-scm.com/)
 - [Visual Studio](https://visualstudio.microsoft.com/)
+- [SpecFlow’s Visual Studio extension](https://docs.specflow.org/projects/getting-started/en/latest/GettingStarted/Step1.html)
 
 ## Step 1: Clone the SpecFlow Test Project
 
