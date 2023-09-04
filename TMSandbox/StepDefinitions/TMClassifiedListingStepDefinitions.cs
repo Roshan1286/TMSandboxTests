@@ -7,39 +7,46 @@ using TMSandbox.Lib.ServiceHelper;
 namespace TMSandbox.StepDefinitions;
 
 [Binding]
-public sealed class TMClassifiedListingStepDefinitions
+public sealed class TmClassifiedListingStepDefinitions
 {
-    private bool Catalogue;
-    private int CategoryId;
-    private JObject CategoryResponseInJsonObj;
+    private bool _catalogue;
+    private int _categoryId;
+    private JObject _categoryResponseInJsonObj;
 
     [Given(@"The CategoryId is (.*) and Catalogue is set to (.*)")]
     public void GivenTheCategoryIdIs(int categoryId, bool catalogue)
     {
-        CategoryId = categoryId;
-        Catalogue = catalogue;
+        _categoryId = categoryId;
+        _catalogue = catalogue;
     }
 
     [Given(@"TMSandbox service is up and running")]
-    public void GivenTMSandboxServiceIsUpAndRunning()
+    public void GivenTmSandboxServiceIsUpAndRunning()
     {
-        if (!TMSandboxHelper.IsAlive())
+        if (!TmSandboxHelper.IsAlive())
         {
             Assert.Inconclusive("TMSandbox service may not be up and running. Please check the service url correctness in the config or the service status");
         }
     }
 
     [When(@"When a TMSandbox service request is made")]
-    public void MakeTMSandboxServiceRequest()
+    public void MakeTmSandboxServiceRequest()
     {
-        var response = TMSandboxHelper.GetCategoriesDetails(CategoryId, Catalogue).ToString();
-        CategoryResponseInJsonObj = JsonConvert.DeserializeObject<JObject>(response)!;
+        var response = TmSandboxHelper.GetCategoriesDetails(_categoryId, _catalogue).ToString();
+        if (response == null)
+        {
+            Assert.Fail($"Unable to retrieve valid response from TMSandbox service with {_categoryId} and {_catalogue}");
+        }
+        else
+        {
+            _categoryResponseInJsonObj = JsonConvert.DeserializeObject<JObject>(response)!;
+        }
     }
 
     [Then(@"The service response should contain (.*) element with name as (.*) with description as (.*)")]
-    public void TMSandboxServiceResponseElementAndDescriptionCheck(string sectionName, string elementName, string elementDescription)
+    public void TmSandboxServiceResponseElementAndDescriptionCheck(string sectionName, string elementName, string elementDescription)
     {
-        foreach (JProperty jToken in (JToken)CategoryResponseInJsonObj)
+        foreach (JProperty jToken in (JToken)_categoryResponseInJsonObj)
         {
             // Look for promotions in Json 
             if (jToken.Name.Equals(sectionName))
@@ -65,15 +72,15 @@ public sealed class TMClassifiedListingStepDefinitions
     }
 
     [Then(@"The service response should contain Name as (.*) and CanRelist attribute should be (.*)")]
-    public void TMSandboxServiceResponseNameAndRelistCheck(string expectedCategoryName, bool expectedCanRelistValue)
+    public void TmSandboxServiceResponseNameAndRelistCheck(string expectedCategoryName, bool expectedCanRelistValue)
     {
-        var categoryNameInResponse = (string)CategoryResponseInJsonObj.SelectToken("$.Name")!;
+        var categoryNameInResponse = (string)_categoryResponseInJsonObj.SelectToken("$.Name")!;
         if (!categoryNameInResponse.Equals(expectedCategoryName, StringComparison.OrdinalIgnoreCase))
         {
             Assert.Fail($"Name property value in response {categoryNameInResponse} doesn't match the expected value {expectedCategoryName}");
         }
 
-        var canRelistValueInResponse = (bool)CategoryResponseInJsonObj.SelectToken("$.CanRelist")!;
+        var canRelistValueInResponse = (bool)_categoryResponseInJsonObj.SelectToken("$.CanRelist")!;
         if (!canRelistValueInResponse.Equals(expectedCanRelistValue))
         {
             Assert.Fail($"CanRelist property value in response {canRelistValueInResponse} doesn't match the expected value {expectedCanRelistValue}");
