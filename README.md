@@ -65,6 +65,5 @@ Now that the project is set up, you can run the SpecFlow tests:
 
 The SpecFlow tests will be executed, and you will see the results in the Test Explorer window. Any test failures or errors will be displayed, allowing you to investigate and resolve issues.
 
-## Examples of Test Run
-![image](https://github.com/Roshan1286/TMSandboxTests/assets/75067556/40aac5c3-d0d0-4af5-97b2-2138a15da92b)
-
+## Examples of Test Run 
+![unnamed](https://github.com/Roshan1286/TMSandboxTests/assets/75067556/700031bf-fe4f-4a78-8601-ea48867d9958)
